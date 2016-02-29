@@ -1,0 +1,163 @@
+/* Color palettes
+ *
+ * Blue - #35a6ba rgba(34, 162, 185, 0.7)
+ *
+ * Red - #e74c3c - rgba(231, 76, 60, 0.7)
+ *
+ * Links - #19D6B0 rgba(25, 214, 176, 0.7)
+ * Background - #f3f3f3
+ * Box shadow - rgba(173, 172, 172, 0.82)
+ * Font color: #383838 (default)
+ * */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Remove outline design in Chrome for buttons */
+button:focus {
+    outline: none;
+}
+
+body {
+    background-color: #f3f3f3;
+    font-family: "Lato" sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: #383838;
+}
+
+a {
+    color: rgba(25, 214, 176, 0.7);
+    text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6,
+.brand-name, #vault {
+    font-family: "Open Sans" sans-serif;
+}
+
+/* Give right space for icons using i element */
+i.fa {
+    margin-right: 5px;
+}
+
+/* Use this for call to action buttons. e.g Sign up now  */
+.btn-primary {
+    background-color: rgba(34, 162, 185, 0.7);
+    color: white;
+    border: none;
+    box-shadow: 1px 1px 1px rgba(173, 172, 172, 0.5);
+    border-radius: 2px;
+    padding: 5px 20px;
+    font-weight: 700;
+}
+
+.read-more {
+    border: none;
+    background: white;
+    color: rgba(25, 214, 176, 0.7);
+    display: block;
+    text-align: center;
+    width: 100%;
+    min-height: 40px;
+}
+
+/*.wrap-word {*/
+    /*white-space: -moz-pre-wrap;  [> Mozilla, since 1999 <]*/
+    /*white-space: -webkit-pre-wrap; [>Chrome & Safari <] */
+    /*white-space: -pre-wrap;      [> Opera 4-6 <]*/
+    /*white-space: -o-pre-wrap;    [> Opera 7 <]*/
+    /*white-space: pre-wrap;       [> css-3 <]*/
+    /*word-wrap: break-word;       [> Internet Explorer 5.5+ <]*/
+    /*word-break: break-all;*/
+    /*white-space: normal;*/
+/*}*/
+
+
+.relative-container {
+    position: relative;
+}
+
+#navigation {
+    /*background-color: pink;*/
+    width: 100%;
+    min-height: 50px;
+    padding: 10px 20px;
+    position: fixed;
+    box-sizing: border-box;
+}
+
+#navigation > .brand-name {
+    color: rgba(34, 162, 185, 0.7);;
+    font-size: 1.8em;
+    font-weight: 700;
+    position: absolute;
+    top: 15px;
+    left: 30px;
+}
+
+#navigation > #vault {
+    font-size: 1.3em;
+    color: rgba(34, 162, 185, 0.7);;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    /*background-color: green;*/
+}
+
+#navigation > #vault > i {
+    margin-right: 5px;
+    font-size: 1.8em;
+}
+
+
+/* Loading animation: Thanks to: http://tobiasahlin.com/spinkit/ */
+
+.spinner {
+  width: 40px;
+  height: 40px;
+
+  position: relative;
+  margin: 100px auto;
+}
+
+#spinner-wrapper {
+    width: 100%;
+}
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: rgba(34, 162, 185, 0.7);;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  -webkit-animation: sk-bounce 1.5s infinite ease-in-out;
+  animation: sk-bounce 1.5s infinite ease-in-out;
+}
+
+.double-bounce2 {
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s;
+}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}

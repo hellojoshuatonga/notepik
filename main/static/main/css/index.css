@@ -1,0 +1,335 @@
+.centered-container {
+    position: relative;
+}
+
+#main-content {
+    padding-top: 10px;
+    height: 100vh;
+}
+
+#notebox {
+    text-align: center;
+    min-width: 430px;
+    height: 180px;
+    padding: 10px;
+    position: absolute;
+    /*top: 50%;*/
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, 0);
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 1px 1px 1px rgba(173, 172, 172, 0.82);
+}
+
+#notebox #note-textarea {
+    font-size: 0.9em;
+    resize: none;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid rgba(191, 190, 190, 0.42);
+    width: 90%;
+    height: 100%;
+    padding: 10px 0;
+    overflow: hidden;
+}
+
+#notebox #notebox-bottom-panel {
+    position: relative;
+    padding: 10px 20px 20px 20px;
+    display: flex;
+    align-items: center;
+}
+
+#notebox-bottom-panel #search-box {
+    flex-grow: 2;
+    margin-right: 10px;
+    position: relative;
+    display: flex;
+}
+
+#search-box #search-textinput {
+    flex-grow: 2;
+    outline: none;
+    padding: 7px 20px 7px 35px;
+    border-radius: 50px;
+    border: 1px solid rgba(191, 190, 190, 0.42);
+    transition: border .1s linear;
+    cursor: text;
+}
+
+#search-box #search-icon {
+    position: absolute;
+    top: 25%;
+    left: 4%;
+    color: rgb(191, 190, 190);
+    transition: color .1s ease-in;
+}
+
+
+#notebox-bottom-panel #post-btn {
+    padding: 5px 20px;
+    font-weight: 700;
+    margin-left: 5px;
+}
+
+#posted-notes {
+    /*background: green;*/
+    /*text-align: center;*/
+    min-width: 430px;
+    height: 90vh;
+    margin-top: 200px;
+    /*padding: 10px;*/
+    position: absolute;
+    /*top: 50%;*/
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, 0);
+}
+
+#posted-notes .notes {
+    background-color: white;
+    margin-bottom: 15px;
+    padding: 5px 20px 10px 20px;
+    border-radius: 2px;
+    box-shadow: 1px 1px 1px rgba(173, 172, 172, 0.82);
+    position: relative;
+}
+
+#posted-notes .note-date {
+    /*background-color: green;*/
+    position: absolute;
+    top: 5px;
+    margin: 5px;
+    right: 10px;
+    font-size: 0.8em;
+    color: #6b6b6b;
+    /*font-weight: 700;*/
+}
+
+#posted-notes .note-message, #posted-notes .note-short,
+#posted-notes .note-full {
+    margin-top: 30px;
+    word-wrap: break-word;
+    /*word-break: break-all;*/
+}
+
+
+#posted-notes .notes-bottom-panel {
+    /*background-color: green;*/
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+#posted-notes .bottom-panel-button {
+    border: none;
+    background-color: transparent;
+    font-size: 0.8em;
+    color: rgba(34, 162, 185, 0.7);
+}
+
+#posted-notes .add-to-vault-count {
+    margin-right: 3px;
+    color: rgba(34, 162, 185, 0.7);
+    font-size: 0.9em;
+    /*cursor: pointer;*/
+}
+
+#posted-notes .note-categories {
+    margin-top: 10px;
+    word-wrap: break-word;
+}
+
+#posted-notes .note-category {
+    display: inline-block;
+    margin: 3px 2px;
+    background-color: rgba(25, 214, 176, 0.7);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 2px;
+    text-transform: capitalize;
+}
+
+
+/* For key form popup */
+#popup-key-form {
+    text-align: center;
+    z-index: 999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 1px 1px 1px rgba(173, 172, 172, 0.82);
+}
+
+#popup-key-form-top-panel {
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+#popup-key-form-top-panel #close-key-form-btn {
+    color: rgba(34, 162, 185, 0.7);
+}
+
+#popup-key-form-content {
+    /*background-color: green;*/
+    padding: 10px 0;
+}
+
+#popup-key-form-content #key-label {
+    display: block;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+#popup-key-form-content #key-input {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgba(191, 190, 190, 0.42);
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+#popup-key-form-bottom-panel {
+    text-align: right;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
+}
+
+#popup-key-form-bottom-panel #post-key-btn {
+    position: relative;
+    right: 20px;
+    bottom: 11px;
+}
+
+/* 
+ * For lightbox
+ *
+ * */
+.dimmer {
+    background: #000;
+    position: fixed;
+    opacity: 0.5;
+    top: 0;
+    z-index: 99;
+}
+
+#lightbox-key {
+    visibility: hidden;
+    position: fixed;
+    background: white;
+    border-radius: 2px;
+    box-shadow: 1px 1px 1px rgba(173, 172, 172, 0.82);
+    z-index: 100;
+    width: 300px;
+    height: 200px;
+    /*padding: 5px 20px 20px 20px;*/
+    padding: 0;
+    top: 25%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, 0);
+}
+
+#lightbox-key #lightbox-key-top-panel {
+    text-align: right;
+    position: absolute;
+    padding: 10px 0 0 0;
+    height: 50px;
+    width: 100%;
+}
+
+#lightbox-key #lightbox-key-bottom-panel {
+    text-align: center;
+    padding: 0 10px 30px 10px;
+    position: absolute;
+    height: 50px;
+    bottom: 0;
+    width: 100%;
+}
+
+#lightbox-key #lightbox-key-close {
+    background-color: transparent;
+    border: none;
+    /*position: relative;*/
+    /*top: 5px;*/
+    /*right: -25px;*/
+    border-radius: 2px;
+    padding: 5px 20px;
+    color: #383838;
+    font-size: 0.9em;
+}
+
+#lightbox-key #lightbox-key-content {
+    text-align: center;
+    position: absolute;
+    top: 50px;
+    bottom: 50px;
+    width: 100%;
+    padding: 0 10px;
+}
+
+#lightbox-key #key-submit-label {
+    display: block;
+    font-size: 1.4em;
+}
+
+/* lightbox key input */
+#lightbox-key #key-submit {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgba(191, 190, 190, 0.42);
+    padding: 10px 5px;
+    text-align: center;
+    width: 80%
+}
+
+#lightbox-key #key-submit-btn {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding: 0;
+    color: rgba(34, 162, 185, 0.7);
+    font-size: 1.2em;
+}
+
+
+/* Hashtag panel */
+#hashtag-panel {
+    /*background: pink;*/
+    padding: 0px 30px;
+    margin-bottom: 30px;
+}
+
+#hashtag-panel #hashtag-main {
+    text-align: center;
+}
+
+#hashtag-panel #hashtag-info {
+    text-align: center;
+}
+
+#hashtag-panel #hashtag-info li {
+    list-style-type: none;
+    margin-bottom: 15px;
+    color: rgba(99, 99, 99, 0.89);
+}
+
+#hashtag-panel #hashtag-info a {
+    font-weight: 700;
+}
+
+#hashtag-panel .other-hashtags {
+    display: block;
+    margin-top: 5px;
+}
+
+#hashtag-panel .other-hashtags::first-letter {
+    text-transform: uppercase;
+}

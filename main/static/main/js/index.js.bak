@@ -1,0 +1,149 @@
+// Global variables
+// --- Elements 
+var keyInput = document.getElementById("key-input");
+var noteTextArea = document.getElementById("note-textarea");
+var noteBox = document.getElementById("notebox");
+var postedNotes = document.getElementById("posted-notes");
+
+// --- Constants
+var noteBoxInitialHeight = 0;
+var postedNotesInitialMarginTop = 0;
+var noteBoxOffset = 75;
+var postedNotesOffset = 100;
+var windowOffset = 100;
+var growLimit = 500;
+
+
+// Grow textarea when typing
+noteTextArea.onkeyup = function() {
+    resize();
+}
+
+// Resize the notebox on page load
+window.addEventListener('load', function() {
+    // Set initial height of noteTextArea and noteBox on load
+    resize();
+}, false); // end of load event
+
+
+function resize() {
+    // Reset the height
+    noteTextArea.style.height = "";
+    noteTextArea.style.height = Math.min(noteTextArea.scrollHeight, growLimit) + "px";
+    console.log("note-textarea: height=" + noteTextArea.style.height);
+    // Same as above but in notebox
+    noteBox.style.height = "";
+    noteBox.style.height = Math.min(noteTextArea.scrollHeight, growLimit) + noteBoxOffset + "px";
+    console.log("notebox: height=" + noteBox.style.height);
+    // Same as above again but with margin-top :)
+    postedNotes.style.marginTop = "";
+    postedNotes.style.marginTop = Math.min(noteTextArea.scrollHeight, growLimit) + postedNotesOffset + "px";
+    console.log("posted-notes: margin-top=" + postedNotes.style.marginTop);
+
+    // Initialize once the height of noteBox and the marginTop of posted-notes
+    if (noteBoxInitialHeight == 0) {
+        // get the height of textarea without value for minnum height
+        if (noteTextArea.value.length != 0) {
+            console.log("Textarea with data");
+
+            tmp_value = noteTextArea.value;
+            noteTextArea.value = '';
+
+            // Reset the height
+            noteTextArea.style.height = "";
+            noteTextArea.style.height = Math.min(noteTextArea.scrollHeight, growLimit) + "px";
+
+            noteBox.style.height = "";
+            noteBox.style.height = Math.min(noteTextArea.scrollHeight, growLimit) + noteBoxOffset + "px";
+            noteBoxInitialHeight = noteBox.clientHeight;
+            console.log("notebox inside of if statement: height=" + noteBox.style.height);
+
+            // Same as above again :)
+            postedNotes.style.marginTop = "";
+            postedNotes.style.marginTop = Math.min(noteTextArea.scrollHeight, growLimit) + postedNotesOffset + "px";
+            postedNotesInitialMarginTop = $("#posted-notes").css("margin-top");
+            console.log("posted-notes inside of if statement: margin-top=" + postedNotes.style.marginTop);
+
+            // Put the data back in textarea
+            noteTextArea.value = tmp_value;
+        } else {
+            console.log("Textarea without data");
+            noteBoxInitialHeight = noteBox.clientHeight;
+        }
+
+    }
+
+    // Save the first margin-top value of posted-notes
+    if (postedNotesInitialMarginTop == 0) {
+        postedNotesInitialMarginTop = $('#posted-notes').css('margin-top');
+    }
+
+    // Scroll along when typing a lot
+    if (noteBox.scrollHeight >= window.innerHeight - windowOffset) {
+        window.scrollTo(0, window.innerHeight - (windowOffset * 3));
+    }
+}
+
+// Toggle to show/hide for notebox
+function toggleKeyForm(id) {
+    var element = document.getElementById(id);
+
+    if (element.style.display == 'none') {
+        console.log("Key form showed!");
+        element.style.display = 'block';
+
+        // Focus the input in key-input
+        keyInput.focus();
+
+        // Reset the height and margin-top to default (initial)
+        noteBox.style.height = noteBoxInitialHeight + "px";
+        noteTextArea.style.height = (noteBoxInitialHeight - noteBoxOffset) + "px";
+        postedNotes.style.marginTop = postedNotesInitialMarginTop;
+    } else {
+        element.style.display = 'none';
+        console.log('Key form hid!')
+
+        // Focus the input in note-textarea
+        noteTextArea.focus();
+        // resize it again when they click back
+        resize();
+    }
+}
+
+// Toggle add to vault count in notes
+function toggleAddToVault(elem) {
+    var notepk = elem.getAttribute("data-notepk");
+    console.log("Note pk: " + notepk);
+    var count_view = elem.parentNode.childNodes[1].childNodes[1];
+    var count = count_view.innerText;
+
+    if (parseInt(count)) {
+        count = parseInt(count) + 1;
+        count_view.innerText = count;
+    } else {
+        count = 1;
+        count_view.innerText = count;
+    }
+
+    console.log("Count: " + parseInt(count));
+    var url = "/api/notes/" + notepk + "/add_to_vault";
+
+
+    $.ajax({
+        url: url,
+        dataType: 'json',
+        success: function(result) {
+            console.log(result);
+        },
+        error: function(result) {
+            console.log(result);
+            if (count == 1) {
+                count = 0;
+                count_view.innerText = '';
+            } else {
+                count -= 1;
+                count_view.innerText = count;
+            }
+        },
+    })
+}

@@ -1,0 +1,10 @@
+{
+    "name": "notepik",
+    "version": "0.1.0",
+    "authors": [
+        "Joshua Tonga <hellojoshuatonga@gmail.com"
+    ],
+    "keywords": [
+        "django"
+    ],
+}

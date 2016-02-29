@@ -1,0 +1,124 @@
+{% extends "main/base.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load custom_filters %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'main/css/index.css' %}">
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<script src="{% static 'main/js/index.js' %}"></script>
+{% endblock %}
+
+
+{% block navigation %}
+<a id="vault" href="#"><i class="fa fa-archive"></i>VAULT</a>
+{% endblock %}
+
+{% block content %}
+
+<div id="main-content">
+    <div class="centered-container">
+
+        <div id="notebox" class="notebox-tooltip" title="">
+            <form id="post-note-form" action="{% url 'main:index' %}" method='POST'>
+                {% csrf_token %}
+
+                {{ form.note }}
+
+                <div id="notebox-bottom-panel">
+                    <div id="search-box">
+                        <i id="search-icon" class="fa fa-search"></i>
+                        {{ search_form.search | attr:"readonly" }}
+                    </div>
+                    <a href="#" id="post-btn" class="btn-primary">Post</a>
+                </div>
+                <div id="popup-key-form" style="display: none;">
+                    <div id="popup-key-form-top-panel">
+                        <a href="#" id="close-key-form-btn" onclick="toggleKeyForm('popup-key-form')"><i class="fa fa-chevron-left"></i>Back</a>
+                    </div>
+
+                    <div id="popup-key-form-content">
+                            <label id="key-label" for="{{ form.key.id_for_label }}">Key</label>
+                            {{ form.key }}
+                    </div>
+
+
+                    <div id="popup-key-form-bottom-panel">
+                        <button id="post-key-btn" class="btn-primary" type="submit">Post</button>
+                    </div>
+                </div>
+            </form>
+        </div> <!-- notebox -->
+
+
+        <section id="posted-notes">
+            {% for note in notes %}
+                <div class="notes">
+                    {# Display the date in a readable format. e.g 5 mins ago #}
+                    <p class="note-date">{{ note.date_created | timeago }}</p>
+                    {% if note.note|length > 400 %}
+                        <p class="note-message">
+                            <p class="note-short">
+                                {{ note.note|truncatechars:400 }}
+                            </p>
+                            <p class="note-full" style="display: none;">
+                                {{ note.note }}
+                            </p>
+                        </p>
+                        <button class="read-more">
+                            <i class="fa fa-chevron-circle-down"></i>
+                            Read more</button>
+                    {% else %}
+                        <p class="note-message">
+                            {{ note.note }}
+                        </p>
+                    {% endif %}
+
+                    {% if note.categories.all %}
+                    <div class="note-categories">
+                    {% for category in note.categories.all %}
+                        {# display the all the categories capitalized #}
+                        <a href="#" class="note-category">{{ category.category }}</a>
+                    {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="notes-bottom-panel">
+                        <div class="add-to-vault-count fa fa-archive">
+                            <span>
+                                {% if note.reposters.count != 0 %}
+                                    {{ note.reposters.count }}
+                                {% endif %}
+                            <span>
+                        </div>
+                        <button class="bottom-panel-button add-to-vault-btn" data-notepk="{{ note.pk }}"><i class="fa fa-plus"></i>Add to vault</button>
+                    </div>
+                </div>
+            {% endfor %}
+            
+        </section> <!-- posted-notes -->
+    </div> <!-- centered-container -->
+
+</div> <!-- main-container -->
+
+<div id="lightbox-key">
+    <form id="key-submit-form" method="POST">
+        {% csrf_token %}
+        <div id="lightbox-key-top-panel">
+            <a href="#" id="lightbox-key-close" style="display:none;">Close</a>
+        </div>
+        <div id="lightbox-key-content">
+            <label id="key-submit-label" for="{{ key_form.key.id_for_label }}">Key</label>
+            {{ key_form.key }}
+        </div>
+        <div id="lightbox-key-bottom-panel">
+            <button id="key-submit-btn" type="submit"><i class="fa fa-lock"></i>Open</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+
